@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ test.name }}</title>
+</head>
+<body>
+    <button><a href="{% url 'my_tests' %}">Вернуться</a></button>
+    <hr>
+    <h1>{{ test.name }}</h1>
+    {% if test.image %}
+    <img src="{{ test.image.url }}" alt="connect">
+    {% endif %}
+    <p>{{ test.description }}</p>
+    {% if user.username == test.author %}
+    <button><a href="{% url 'questions_list' pk=test.pk %}">Список вопросов</a></button>
+    {% endif %}
+    <button><a href="{% url 'pass_test' pk=test.pk %}">Пройти тест</a></button>
+</body>
+</html>

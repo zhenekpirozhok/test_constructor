@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <title>Новый тест</title>
+</head>
+<body>
+    <h1>Новый тест</h1>
+    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>

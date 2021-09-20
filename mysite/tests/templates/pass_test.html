@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ test.name }}</title>
+</head>
+<body>
+<button><a href="{% url 'test_detail' pk=test.pk %}">Вернуться</a></button>
+<hr>
+<h1>{{ test.name }}</h1>
+<form method="post" > {% csrf_token %}
+    {% for question in test.questions.all %}
+    <p><b>{{ question.text }}</b></p>
+        {% for answer in question.answers.all %}
+            {% if question.type == 'S' %}
+                <p><input type="radio" value="{{ answer.id }}" name="{{ question.create_label }}">{{ answer.text }}</p>
+            {% else %}
+                <p><input type="checkbox" value="{{ answer.id }}" name="{{ answer.create_label }}">{{ answer.text }}</p>
+            {% endif %}
+            {% if answer.image %}
+                <img src="{{ answer.image.url }}" alt="connect">
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="Отправить" />
+</form>
+</body>
+</html>

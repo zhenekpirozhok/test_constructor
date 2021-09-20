@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ test.name }}</title>
+    <style>
+        .answers {
+        margin-left: 3%;
+        }
+    </style>
+</head>
+<body>
+<button><a href="{% url 'test_detail' pk=test.pk %}">Вернуться</a></button>
+<hr>
+<h1>{{ test.name }}</h1>
+<hr>
+<h3>Результаты</h3>
+<button><a href="{% url 'new_result' pk=test.pk %}" >Добавить результат</a></button>
+{% for result in test.results.all %}
+<p>{{ result.lower_limit }} - {{ result.upper_limit }} б.</p>
+<p>{{ result.text }}</p>
+<button><a href="{% url 'delete_result' pk=test.pk result_pk=result.pk %}">Удалить</a></button>
+{% endfor %}
+    {% for question in test.questions.all%}
+    <hr>
+    <h2>{{ question.text }}</h2>
+    <button><a href="{% url 'delete_question' pk=test.pk question_pk=question.pk %}">Удалить вопрос</a></button>
+    <div class="answers">
+        {% for answer in question.answers.all %}
+        <p>{{ answer.text }} - {{ answer.value }} б.</p>
+        {% if answer.image %}
+            <img src="{{ answer.image.url }}" alt="connect">
+        {% endif %}
+        <br>
+        <button><a href="{% url 'delete_answer' pk=test.pk question_pk=question.pk answer_pk=answer.pk %}" >Удалить ответ</a></button>
+        {% endfor %}
+        <br><br>
+        <button><a href="{% url 'new_answer' question_pk=question.pk pk=question.test.pk %}">Добавить ответ</a></button>
+    </div>
+    {% endfor %}
+    <hr>
+    <button><a href="{% url 'new_question' pk=test.pk %}" >Добавить вопрос</a></button>
+</body>
+</html>

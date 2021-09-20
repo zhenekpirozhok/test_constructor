@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+    <title>Личный кабинет</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+<h1>Мои тесты</h1>
+<p>Привет, {{ user.username }}!</p>
+<p><a href="{% url 'logout' %}">Выйти из аккаунта</a></p>
+<p><a href="{% url 'tests' %}">На главную</a></p>
+<hr>
+<h2><a href="{% url 'new_test' %}">Создать новый тест</a></h2>
+{% for test in tests %}
+    <hr>
+    <h2><a href="{% url 'test_detail' pk=test.pk %}" >{{ test.name }}</a></h2>
+        {% if test.image %}
+        <img src="{{ test.image.url }}" alt="connect">
+        {% endif %}
+    <p>{{ test.description }}</p>
+    <button><a href="{% url 'delete_test' pk=test.pk %}" >Удалить тест</a></button>
+{% endfor %}
+{% else %}
+<p>Вы не вошли в систему.</p>
+<a href="{% url 'login' %}">Войти</a>
+{% endif %}
+</body>
+</html>

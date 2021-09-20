@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все тесты</title>
+</head>
+<body>
+<h1>Все тесты</h1>
+<h2>Искать по тегам:</h2>
+<button><a href="{% url 'all_tests' %}">Все</a></button>
+<button><a href="{% url 'ed_tests' %}">Образовательные</a></button>
+<button><a href="{% url 'en_tests' %}">Развлекательные</a></button>
+<button><a href="{% url 'ps_tests' %}">Психологические</a></button>
+<p><a href="{% url 'tests' %}">На главную</a></p>
+{% for test in tests %}
+    <hr>
+    <h2><a href="{% url 'test_detail' pk=test.pk %}" >{{ test.name }}</a></h2>
+    {% if test.image %}
+    <img src="{{ test.image.url }}" alt="connect">
+    {% endif %}
+    <p>{{ test.description }}</p>
+{% endfor %}
+</body>
+</html>

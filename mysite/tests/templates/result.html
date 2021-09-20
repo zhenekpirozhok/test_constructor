@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результат</title>
+</head>
+<body>
+<p>Вы набрали {{ total_score }} баллов.</p>
+    {% for result in test.results.all %}
+        {% if total_score >= result.lower_limit and total_score < result.upper_limit %}
+        <p>{{ result.text }}</p>
+        {% endif %}
+    {% endfor %}
+<button><a href="{% url 'tests' %}">ОК</a></button>
+</body>
+</html>

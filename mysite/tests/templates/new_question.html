@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Новый вопрос</title>
+</head>
+<body>
+    <form method="post"> {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Сохранить">
+    </form>
+</body>
+</html>
